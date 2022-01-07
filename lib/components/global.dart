@@ -14,12 +14,12 @@ void showLoading(isLoading, context) {
               title: Stack(
                 children: <Widget>[
                   Image.asset(
-                    'images/logo.png',
+                    'assets/logos/logo.png',
                     height: 50,
                     // color: isDark(context) ? Colors.white : Colors.black,
                   ),
                   Image.asset(
-                    'images/logo.png',
+                    'assets/logos/logo.png',
                     height: 50,
                   ),
                 ],
@@ -56,12 +56,12 @@ void showError(String msg, context, action) {
             title: Stack(
               children: <Widget>[
                 Image.asset(
-                  'images/logo.png',
+                  'assets/logos/logo.png',
                   color: Colors.white,
                   height: 50,
                 ),
                 Image.asset(
-                  'images/logo.png',
+                  'assets/logos/logo.png',
                   height: 50,
                 ),
               ],
