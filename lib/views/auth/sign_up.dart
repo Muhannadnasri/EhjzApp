@@ -1,3 +1,4 @@
+import 'package:ehjz_flutter/components/global.dart';
 import 'package:ehjz_flutter/components/navigate.dart';
 import 'package:ehjz_flutter/components/re_usable_buttons/re_usable_primary_button.dart';
 import 'package:ehjz_flutter/components/re_usable_buttons/social_button_horizontal.dart';
@@ -7,10 +8,16 @@ import 'package:ehjz_flutter/views/auth/login_page.dart';
 import 'package:ehjz_flutter/views/auth/otp_verify_input_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -239,5 +246,40 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> register() async {
+    // if (_register.currentState.validate()) {
+    //   _register.currentState.save();
+    // } else {
+    //   return;
+    // }
+    Future.delayed(Duration.zero, () {
+      showLoading(true, context);
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://app.qserve.ml/code/register.php'),
+        body: {
+          // 'mobile': mobile,
+          // 'secretkey': secretKey,
+          // 'fullName': fullName,
+          // 'email': email,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          showLoading(false, context);
+          // globalName = fullName;
+          // globalEmail = email;
+          // Navigator.of(context).pushNamedAndRemoveUntil(
+          //     HomePage.tag, (Route<dynamic> route) => false);
+        });
+      }
+    } catch (x) {
+      showError('',context, register);
+    }
   }
 }
