@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import 'package:ehjz_flutter/components/global.dart';
 import 'package:ehjz_flutter/components/navigate.dart';
 import 'package:ehjz_flutter/components/re_usable_buttons/re_usable_primary_button.dart';
 import 'package:ehjz_flutter/components/re_usable_buttons/social_button.dart';
@@ -8,13 +13,28 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _scaffoldKeyLogin = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // login();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKeyLogin,
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -220,5 +240,42 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future login() async {
+    Future.delayed(Duration.zero, () {
+      showLoading(true, context);
+    });
+    try {
+      final response = await http.post(
+        Uri.parse('https://app.damscofood.com/login.php'),
+        body: {
+          // 'email': email,
+          // 'password': password,
+        },
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        setState(
+          () {
+            loginJson = json.decode(response.body);
+            // userLvl = int.parse(loginJson['lvl']);
+          },
+        );
+        showLoading(false, context);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        // prefs.setString('email', email);
+        // prefs.setString('password', password);
+        loggedin = true;
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/dashboard', (Route<dynamic> route) => false);
+      } else if (response.statusCode != 200) {
+        final snackBar = SnackBar(content: Text('معلومات الدخول خاطئة'));
+        _scaffoldKeyLogin.currentState!.showSnackBar(snackBar);
+        showLoading(false, context);
+      }
+    } catch (x) {
+      showError('Sorry', context, login);
+    }
   }
 }
