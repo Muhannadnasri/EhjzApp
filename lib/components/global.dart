@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Map loginJson = {};
 bool loggedin = false;
+String accessToken = '';
 void showLoading(isLoading, context) {
   if (isLoading) {
     showDialog(

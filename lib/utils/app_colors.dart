@@ -27,3 +27,18 @@ class AppColors {
   static const featured_tile_title = Color(0xFF191919);
   static const refferal_container = Color(0xFF1A1A1A);
 }
+
+const neutralBackgroundColor = Color(0xFF0E0E0E);
+const gradientBegin = Color(0xFFD99453);
+const gradientEnd = Color(0xFFA8774A);
+const navigationBarUnselectedColor = Color(0xFFE2BC99);
+
+//
+const neutralBackButtonColor = Color(0xFF3E3E3E);
+const neutralGridTileColor = Color(0xFF1A1A1A);
+
+//
+const yachtListsSubtitleColor = Color(0xFF2B2B2B);
+const yachtListsTileBGColor = Color(0xFF202020);
+const yachListsActionBGColor = Color(0xFF494949);
+const yachListsBadgeBGColor = Color(0xFF46A8DB);

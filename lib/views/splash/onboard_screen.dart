@@ -1,10 +1,11 @@
 import 'package:ehjz_flutter/components/navigate.dart';
 import 'package:ehjz_flutter/constants.dart';
 import 'package:ehjz_flutter/views/auth/login_page.dart';
-import 'package:ehjz_flutter/views/auth/otp_verify_input_screen.dart';
 import 'package:ehjz_flutter/views/auth/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../bottom_navigation.dart/homepage_routes.dart';
 
 class OnBoardScreen extends StatelessWidget {
   Color gradientStart = Colors.transparent;
@@ -55,7 +56,7 @@ class OnBoardScreen extends StatelessWidget {
                     decoration: BoxDecoration(),
                     child: TextButton(
                       onPressed: () {
-                        push(context: context, widget: VerifyOtpInputScreen());
+                        push(context: context, widget: HomePageRoutes());
                       },
                       child: Text(
                         'SKIP',

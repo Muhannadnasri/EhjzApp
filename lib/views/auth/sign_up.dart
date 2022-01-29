@@ -5,7 +5,7 @@ import 'package:ehjz_flutter/components/re_usable_buttons/social_button_horizont
 import 'package:ehjz_flutter/constants.dart';
 import 'package:ehjz_flutter/utils/app_icons.dart';
 import 'package:ehjz_flutter/views/auth/login_page.dart';
-import 'package:ehjz_flutter/views/auth/otp_verify_input_screen.dart';
+import 'package:ehjz_flutter/views/bottom_navigation.dart/homepage_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -160,7 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       childText: 'SIGN UP',
                       textColor: Colors.white,
                       onPressed: () {
-                        push(context: context, widget: VerifyOtpInputScreen());
+                        push(context: context, widget: HomePageRoutes());
                       },
                       icon: 'assets/icons/right.png'),
                   Row(children: [
@@ -279,7 +279,7 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }
     } catch (x) {
-      showError('',context, register);
+      showError('', context, register);
     }
   }
 }

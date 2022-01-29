@@ -24,9 +24,12 @@ final screens = [
 class _HomePageState extends State<HomePageRoutes> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       bottomNavigationBar: SizedBox(
-        height: 75.00,
+        height: height / 9,
         child: BottomNavigationBar(
           backgroundColor: AppColors.gradient_begin,
           selectedItemColor: Colors.white,
@@ -53,7 +56,7 @@ class _HomePageState extends State<HomePageRoutes> {
               label: '',
             ),
           ],
-          currentIndex: 0,
+          currentIndex: _selectedItem,
           onTap: (val) {
             setState(() {
               _selectedItem = val;

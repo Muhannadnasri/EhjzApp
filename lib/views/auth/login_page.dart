@@ -1,19 +1,17 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
 import 'package:ehjz_flutter/components/global.dart';
 import 'package:ehjz_flutter/components/navigate.dart';
 import 'package:ehjz_flutter/components/re_usable_buttons/re_usable_primary_button.dart';
-import 'package:ehjz_flutter/components/re_usable_buttons/social_button.dart';
 import 'package:ehjz_flutter/constants.dart';
 import 'package:ehjz_flutter/utils/app_icons.dart';
 import 'package:ehjz_flutter/views/auth/sign_up.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/toggle/gf_toggle.dart';
-import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../bottom_navigation.dart/homepage_routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,8 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKeyLogin = GlobalKey<ScaffoldState>();
   final _logInForm = GlobalKey<FormState>();
 
-  String email='';
-  String password='';
+  String email = '';
+  String password = '';
   var emailCnt = TextEditingController();
   var passwordCnt = TextEditingController();
 
@@ -53,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
       passwordCnt.text = password;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,19 +74,16 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Form(
                 key: _logInForm,
-
                 child: ListView(
                   shrinkWrap: true,
                   // scrollDirection: Axis.vertical,
                   children: [
                     TextFormField(
-                      onSaved: (x){
-
-                        x=email;
+                      onSaved: (x) {
+                        email = x!;
                       },
-                      // controller: 'controller',
+                      controller: emailCnt,
                       decoration: InputDecoration(
-
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -112,11 +108,11 @@ class _LoginPageState extends State<LoginPage> {
                       height: 15,
                     ),
                     TextFormField(
-                      onSaved: (x){
-                        x=password;
+                      onSaved: (x) {
+                        password = x!;
                       },
                       obscureText: true,
-                      // controller: 'controller',
+                      controller: passwordCnt,
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -162,8 +158,6 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                         icon: 'assets/icons/right.png'),
-
-
                     SizedBox(
                       height: 10,
                     ),
@@ -177,8 +171,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextButton(
                           onPressed: () {
-
-
                             push(context: context, widget: SignUpPage());
                           },
                           child: Text(
@@ -218,18 +210,23 @@ class _LoginPageState extends State<LoginPage> {
         setState(
           () {
             loginJson = json.decode(response.body);
+            accessToken = loginJson['access_token'];
           },
         );
         showLoading(false, context);
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        // prefs.setString('email', email);
-        // prefs.setString('password', password);
+        prefs.setString('email', email);
+        prefs.setString('password', password);
         loggedin = true;
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/dashboard', (Route<dynamic> route) => false);
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomePageRoutes()),
+            (Route<dynamic> route) => false);
       } else if (loginJson['status'] == 0) {
-        final snackBar = SnackBar(content: Text(loginJson['message'].toString()));
+        final snackBar =
+            SnackBar(content: Text(loginJson['message'].toString()));
         _scaffoldKeyLogin.currentState!.showSnackBar(snackBar);
+        showLoading(false, context);
+      } else {
         showLoading(false, context);
       }
     } catch (x) {

@@ -12,11 +12,11 @@ class CarDetailsImageRow extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.0),
       child: Image(
-        image: AssetImage(
+        image: NetworkImage(
           image,
         ),
-        height: 80.0,
-        width: 85.0,
+        height: 150.0,
+        width: 150.0,
       ),
     );
   }

@@ -35,24 +35,33 @@ class EventDetailsInformationRow extends StatelessWidget {
         SizedBox(
           width: 15,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              label,
-              style: GoogleFonts.montserrat(
-                fontSize: 14,
-                color: Colors.white,
+        ConstrainedBox(
+          constraints: new BoxConstraints(
+            // minHeight: 5.0,
+            minWidth: 100.0,
+            // maxHeight: 30.0,
+            maxWidth: 100.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: GoogleFonts.montserrat(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            Text(
-              date,
-              style: GoogleFonts.montserrat(
-                fontSize: 10,
-                color: Color(0xff717171),
+              Text(
+                date,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.montserrat(
+                  fontSize: 10,
+                  color: Color(0xff717171),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

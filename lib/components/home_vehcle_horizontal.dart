@@ -1,6 +1,8 @@
 import 'package:ehjz_flutter/constants.dart';
 import 'package:ehjz_flutter/utils/app_colors.dart';
-import 'package:ehjz_flutter/views/car_list.dart';
+import 'package:ehjz_flutter/views/Cars/car_list.dart';
+import 'package:ehjz_flutter/views/Cars/car_list_company.dart';
+import 'package:ehjz_flutter/views/Yachts/yacht_list_company.dart';
 import 'package:ehjz_flutter/views/yacts_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +23,8 @@ List<String> categoriesImage = [
 ];
 
 final screens = [
-  YactList(),
-  CarList(),
+  YachtListCompany(),
+  CarListCompany(),
 ];
 
 class _CategoryState extends State<HomeVehcleHorizontal> {
