@@ -24,8 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKeyLogin = GlobalKey<ScaffoldState>();
   final _logInForm = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
   var emailCnt = TextEditingController();
   var passwordCnt = TextEditingController();
 

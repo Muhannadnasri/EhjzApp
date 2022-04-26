@@ -1,7 +1,7 @@
 import 'package:ehjz_flutter/utils/app_colors.dart';
 import 'package:ehjz_flutter/utils/app_icons.dart';
-import 'package:ehjz_flutter/views/bottom_navigation.dart/coupons_navigation.dart';
-import 'package:ehjz_flutter/views/bottom_navigation.dart/favourite_navigation.dart';
+import 'package:ehjz_flutter/views/Purchase/coupons_navigation.dart';
+import 'package:ehjz_flutter/views/Favourite/favourite_navigation.dart';
 import 'package:ehjz_flutter/views/bottom_navigation.dart/home_navigation.dart';
 import 'package:ehjz_flutter/views/bottom_navigation.dart/profile_navigation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class HomePageRoutes extends StatefulWidget {
 int _selectedItem = 0;
 final screens = [
   const HomeNavigation(),
-  FavouritesNavigation(),
+  const FavouritesNavigation(),
   const CouponsNavigation(),
   const ProfileNavigation(),
 ];

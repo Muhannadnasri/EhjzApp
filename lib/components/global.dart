@@ -1,8 +1,13 @@
+import 'package:ehjz_flutter/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 Map loginJson = {};
 bool loggedin = false;
 String accessToken = '';
+
+String email = '';
+String password = '';
 void showLoading(isLoading, context) {
   if (isLoading) {
     showDialog(
@@ -12,29 +17,28 @@ void showLoading(isLoading, context) {
           return WillPopScope(
             onWillPop: null,
             child: new AlertDialog(
-              title: Stack(
-                children: <Widget>[
-                  Image.asset(
-                    'assets/logos/logo.png',
-                    height: 50,
-                    // color: isDark(context) ? Colors.white : Colors.black,
-                  ),
-                  Image.asset(
-                    'assets/logos/logo.png',
-                    height: 50,
-                  ),
-                ],
-              ),
+              backgroundColor: neutralGridTileColor,
+              // title: Image.asset(
+              //   'assets/logos/logo.png',
+              //   height: 50,
+              //   // color: isDark(context) ? Colors.white : Colors.black,
+              // ),
               // shape: SuperellipseShape(
               //   borderRadius: BorderRadius.all(
               //     Radius.circular(20),
               //   ),
               // ),
               content: Padding(
-                padding: const EdgeInsets.only(left: 50.0),
+                padding: const EdgeInsets.only(left: 30.0),
                 child: Row(
                   children: <Widget>[
-                    new Text('Please Wait....'),
+                    SpinKitFadingCircle(
+                      color: AppColors.gradient_begin,
+                    ),
+                    new Text(
+                      'Please Wait....',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ],
                 ),
               ),
